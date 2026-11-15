@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111116">
+<meta name="description" content="COMEBACK 78 study, fitness and vegetarian food tracker">
+<link rel="manifest" href="manifest.webmanifest">
+<title>COMEBACK 78</title>
+<style>
+:root{--bg:#0d0d12;--panel:#191920;--panel2:#23232d;--red:#ff4055;--muted:#aaaab8;--line:#353541;--green:#45d6a0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 0,#3a101b 0,transparent 35%),var(--bg);color:#f7f7fa;font:15px system-ui,Arial,sans-serif}header,main{max-width:1000px;margin:auto;padding:20px}header{padding-top:27px}.tag{color:#ff8390;font-size:11px;letter-spacing:3px;font-weight:900}.brand{font-size:clamp(34px,8vw,54px);font-weight:950;letter-spacing:-2px;margin:4px 0}.brand span{color:var(--red)}.sub,.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card{background:linear-gradient(145deg,var(--panel),#141419);border:1px solid var(--line);border-radius:17px;padding:16px;min-width:0}.wide{grid-column:1/-1}.label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:1.3px;text-transform:uppercase}.big{font-size:44px;font-weight:950;line-height:1.15}.row{display:flex;align-items:center;justify-content:space-between;gap:8px}h2{font-size:18px;margin:0 0 12px}.bar{height:9px;background:#34343f;border-radius:20px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#b81931,var(--red));border-radius:20px}button,input,select{font:inherit}button{background:var(--red);border:0;border-radius:10px;color:white;font-weight:800;padding:10px 13px;cursor:pointer}button.alt{background:#34343f}input,select{background:#101016;border:1px solid var(--line);border-radius:10px;color:white;padding:11px;min-width:0;width:100%}.form{display:flex;gap:8px;margin:10px 0}.form input{flex:1}.list{display:grid;gap:8px}.item{display:flex;gap:9px;align-items:center;background:var(--panel2);padding:10px;border-radius:10px}.item input{width:18px;height:18px;accent-color:var(--red)}.item label{flex:1}.done label{text-decoration:line-through;color:#9292a0}.small{font-size:12px;color:var(--muted)}.pill{border-radius:20px;background:#30303b;padding:4px 8px;font-size:11px}.meal,.exercise{padding:9px 0;border-bottom:1px solid var(--line)}.meal:last-child,.exercise:last-child{border:0}.tabs{display:flex;gap:7px;overflow:auto;margin:15px 0}.tabs button{white-space:nowrap;background:#292932}.tabs button.active{background:var(--red)}.panel{display:none}.panel.active{display:block}.quote{font-weight:850;font-size:18px}.quote span{color:#ff7888}.timer{font-size:42px;font-weight:950;text-align:center;font-variant-numeric:tabular-nums}.center{text-align:center}.water-count{font-size:28px;font-weight:900}.history{display:grid;gap:7px}.history div{background:var(--panel2);padding:9px;border-radius:9px;display:flex;justify-content:space-between}.foot{text-align:center;color:var(--muted);font-size:11px;padding:22px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}header,main{padding-left:14px;padding-right:14px}}
+</style>
+</head>
+<body>
+<header><div class="tag">15 NOV 2026 — 01 FEB 2027</div><div class="brand">COMEBACK <span>78</span></div><div class="sub">Study smart. Move safely. Eat well. Stay consistent.</div></header>
+<main>
+<div class="grid">
+ <section class="card"><div class="label">Exam countdown</div><div class="big" id="days">--</div><div class="small">days until 1 February 2027</div></section>
+ <section class="card"><div class="label">Today's progress</div><div class="big" id="pct">0%</div><div class="bar"><i id="bar"></i></div><div class="small" id="progressText">0 of 0 habits done</div></section>
+</div>
+<nav class="tabs">
+<button class="active" data-tab="study">📚 Study</button><button data-tab="fitness">💪 Fitness</button><button data-tab="food">🥗 Food</button><button data-tab="water">💧 Water</button><button data-tab="stats">📊 Progress</button>
+</nav>
+<section class="panel active" id="study">
+ <div class="card">
+  <h2>Today's study targets</h2><div class="form"><input id="studyInput" placeholder="e.g. Physics: revise electrochemistry"><button id="addStudy">Add</button></div><div class="list" id="studyList"></div>
+ </div>
+ <div class="card" style="margin-top:13px"><h2>⏱️ Focus timer</h2><div class="timer" id="clock">25:00</div><div class="center"><button id="start">Start</button> <button class="alt" id="pause">Pause</button> <button class="alt" id="reset">Reset</button></div><p class="small center">Try 25 minutes of focus, then take a short break.</p></div>
+</section>
+<section class="panel" id="fitness">
+ <div class="card"><h2>Today's movement</h2><p class="small">A gentle starter routine. Use comfortable form, take breaks, and stop if something hurts. Alternate strength days with easier recovery days.</p><div id="fitnessList"></div></div>
+ <div class="card" style="margin-top:13px"><h2>Weekly activity note</h2><p class="small">Aim for a mix of enjoyable movement, strength practice, mobility and rest. Increase gradually rather than pushing for maximum repetitions.</p><input id="fitnessNote" placeholder="Add a note about today's activity"><button style="margin-top:8px" id="saveFitness">Save note</button><p class="small" id="fitnessSaved"></p></div>
+</section>
+<section class="panel" id="food">
+ <div class="card"><h2>🥗 Vegetarian meal ideas</h2><p class="small">Choose a variety of foods and eat enough to support learning, growth and activity. Portions and appetite differ from person to person.</p>
+ <div class="meal"><b>Breakfast</b><div class="small">Poha or oats with milk/curd, plus fruit.</div></div>
+ <div class="meal"><b>Lunch</b><div class="small">Rice or roti, dal/rajma/chana, vegetables and curd.</div></div>
+ <div class="meal"><b>Evening snack</b><div class="small">Roasted chana, peanuts, fruit or a paneer sandwich.</div></div>
+ <div class="meal"><b>Dinner</b><div class="small">Roti or rice, paneer/soy/tofu or dal, and vegetables.</div></div>
+ <div class="meal"><b>Other options</b><div class="small">Nuts, seeds, seasonal fruits, sprouts and milk if you enjoy them.</div></div>
+ </div>
+ <div class="card" style="margin-top:13px"><h2>Meal check-in</h2><div id="mealList"></div><p class="small">This is a gentle reminder, not a calorie or weight tracker.</p></div>
+</section>
+<section class="panel" id="water">
+ <div class="card center"><h2>💧 Water check-in</h2><div class="water-count" id="waterCount">0 glasses</div><p class="small">Drink regularly through the day; needs vary with weather and activity.</p><button id="waterPlus">+ Add a glass</button> <button class="alt" id="waterMinus">Undo</button><p class="small" id="waterMsg"></p></div>
+</section>
+<section class="panel" id="stats">
+ <div class="card"><h2>📊 Your activity summary</h2><div class="history" id="history"></div><p class="small">Your entries are saved in this browser on this device. Clearing browser data may erase them.</p><button class="alt" id="export">Export my data</button></div>
+</section>
+<div class="card wide" style="margin-top:13px"><div class="label">Daily reminder</div><p class="quote">“Small steps, repeated daily, create <span>big change.</span>”</p><div class="small">Rest is part of progress. Keep your goals realistic and enjoy the process.</div></div>
+</main><div class="foot">COMEBACK 78 · Personal study & wellness tracker</div>
+<script>
+const $=id=>document.getElementById(id), dateKey=()=>new Date().toLocaleDateString('en-CA');
+const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}}, put=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const key='cb78_'+dateKey();let study=get(key+'_study',[]), meals=get(key+'_meals',[false,false,false,false]), water=get(key+'_water',0), fitNote=get(key+'_fitnote','');
+const routine=['Warm-up walk or marching in place','Chair squats or comfortable bodyweight squats','Wall push-ups or incline push-ups','Glute bridges','Gentle plank from knees or standing wall hold','Cool-down stretching'];
+let fit=get(key+'_fit',routine.map(()=>false));
+function renderStudy(){let box=$('studyList');box.innerHTML='';if(!study.length)box.innerHTML='<p class="small">Add your first study target.</p>';study.forEach((t,i)=>{let d=document.createElement('div');d.className='item'+(t.done?' done':'');let c=document.createElement('input');c.type='checkbox';c.checked=t.done;c.onchange=()=>{study[i].done=c.checked;put(key+'_study',study);renderAll()};let l=document.createElement('label');l.textContent=t.text;let x=document.createElement('button');x.className='alt';x.textContent='×';x.onclick=()=>{study.splice(i,1);put(key+'_study',study);renderAll()};d.append(c,l,x);box.append(d)})}
+$('addStudy').onclick=()=>{let v=$('studyInput').value.trim();if(v){study.push({text:v,done:false});put(key+'_study',study);$('studyInput').value='';renderAll()}};
+function renderFitness(){let box=$('fitnessList');box.innerHTML='';routine.forEach((t,i)=>{let d=document.createElement('div');d.className='item'+(fit[i]?' done':'');let c=document.createElement('input');c.type='checkbox';c.checked=fit[i];c.onchange=()=>{fit[i]=c.checked;put(key+'_fit',fit);renderAll()};let l=document.createElement('label');l.textContent=t;d.append(c,l);box.append(d)})}
+$('saveFitness').onclick=()=>{fitNote=$('fitnessNote').value;put(key+'_fitnote',fitNote);$('fitnessSaved').textContent='Saved on this device.'};
+$('fitnessNote').value=fitNote;
+function renderMeals(){let box=$('mealList');box.innerHTML='';['Breakfast','Lunch','Evening snack','Dinner'].forEach((t,i)=>{let d=document.createElement('div');d.className='item'+(meals[i]?' done':'');let c=document.createElement('input');c.type='checkbox';c.checked=meals[i];c.onchange=()=>{meals[i]=c.checked;put(key+'_meals',meals);renderAll()};let l=document.createElement('label');l.textContent=t+' check-in';d.append(c,l);box.append(d)})}
+function renderWater(){$('waterCount').textContent=water+' '+(water===1?'glass':'glasses');$('waterMsg').textContent='Logged for today.'}
+$('waterPlus').onclick=()=>{water++;put(key+'_water',water);renderAll()};$('waterMinus').onclick=()=>{water=Math.max(0,water-1);put(key+'_water',water);renderAll()};
+function renderAll(){renderStudy();renderFitness();renderMeals();renderWater();let total=study.length+fit.length+meals.length,done=study.filter(x=>x.done).length+fit.filter(Boolean).length+meals.filter(Boolean).length,p=total?Math.round(done/total*100):0;$('pct').textContent=p+'%';$('bar').style.width=p+'%';$('progressText').textContent=done+' of '+total+' check-ins done'}
+const target=new Date(2027,1,1);$('days').textContent=Math.max(0,Math.ceil((target-new Date())/86400000));
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active')});
+let secs=1500,loop=null;function clock(){$('clock').textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0')}
+$('start').onclick=()=>{if(loop)return;loop=setInterval(()=>{if(secs>0){secs--;clock()}else{clearInterval(loop);loop=null;alert('Focus session complete. Take a break.')}},1000)};
+$('pause').onclick=()=>{clearInterval(loop);loop=null};$('reset').onclick=()=>{clearInterval(loop);loop=null;secs=1500;clock()};
+function renderHistory(){let box=$('history');box.innerHTML='';let days=[];for(let i=0;i<7;i++){let d=new Date();d.setDate(d.getDate()-i);let k='cb78_'+d.toLocaleDateString('en-CA');let a=get(k+'_study',[]),f=get(k+'_fit',[]),m=get(k+'_meals',[false,false,false,false]);days.push({date:d.toLocaleDateString(),done:a.filter(x=>x.done).length+f.filter(Boolean).length+m.filter(Boolean).length,total:a.length+f.length+m.length})}days.forEach(x=>{let d=document.createElement('div');let a=document.createElement('span');a.textContent=x.date;let b=document.createElement('b');b.textContent=x.done+'/'+x.total+' done';d.append(a,b);box.append(d)})}
+$('export').onclick=()=>{let data={study,fitness:fit,fitnessNote:fitNote,meals,water,exportedAt:new Date().toISOString()};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='comeback78-data.json';a.click();URL.revokeObjectURL(a.href)};
+renderAll();renderHistory();clock();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
